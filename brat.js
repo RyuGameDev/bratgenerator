@@ -37,7 +37,7 @@ app.post('/screenshot', async (req, res) => {
   await page.waitForTimeout(500); // Menunggu 500ms jika perlu untuk perubahan UI atau animasi
 
   // 7. Temukan elemen memeContainer dan ambil screenshot
-  const memeContainer = page.locator('#memeContainer');
+  const memeContainer = page.locator('#textOverlay');
   const screenshotBuffer = await memeContainer.screenshot();
 
   // 8. Tutup browser
