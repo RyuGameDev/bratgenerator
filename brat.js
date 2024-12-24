@@ -31,7 +31,7 @@ app.post('/screenshot', async (req, res) => {
   await page.click('#toggleButtonWhite');
 
   // 5. Ubah nilai input dengan ID textInput
-  await page.fill('#textInput', 'KONTOLL'); // Ganti 'KONTOLL' dengan teks yang diinginkan
+  await page.fill('#textInput', inputText); // Ganti 'KONTOLL' dengan teks yang diinginkan
 
   // 6. Tunggu beberapa saat jika diperlukan, pastikan elemen termodifikasi dengan baik
   await page.waitForTimeout(500); // Menunggu 500ms jika perlu untuk perubahan UI atau animasi
