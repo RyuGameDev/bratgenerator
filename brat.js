@@ -18,26 +18,30 @@ app.post('/screenshot', async (req, res) => {
 
     // Memulai browser dan halaman
     const browser = await chromium.launch();
-    const page = await browser.newPage();
+  const page = await browser.newPage();
 
-    // 1. Mengunjungi halaman bratgenerator.com
-    await page.goto('https://www.bratgenerator.com/');
+  // 2. Buka halaman web
+  await page.goto('URL_HALAMAN'); // Ganti dengan URL halaman Anda
 
-    // 2. Mengklik tombol untuk mengubah tema (toggleButtonWhite)
-    await page.click('#toggleButtonWhite');
+  // 3. Tunggu dan tutup pop-up persetujuan cookie jika ada
+  await page.locator('#onetrust-accept-btn-handler').click(); // Ganti dengan selector tombol jika berbeda
 
-    // 3. Mengubah nilai input text
-    await page.fill('#textInput', inputText);
+  // 4. Tunggu elemen toggleButtonWhite muncul dan klik
+  await page.locator('#toggleButtonWhite').waitFor({ state: 'visible' });
+  await page.click('#toggleButtonWhite');
 
-    // Tunggu jika ada perubahan UI (misalnya, animasi atau render elemen baru)
-    await page.waitForTimeout(500);
+  // 5. Ubah nilai input dengan ID textInput
+  await page.fill('#textInput', 'KONTOLL'); // Ganti 'KONTOLL' dengan teks yang diinginkan
 
-    // 4. Mengambil screenshot dari memeContainer
-    const memeContainer = await page.locator('#memeContainer');
-    const screenshotBuffer = await memeContainer.screenshot();
+  // 6. Tunggu beberapa saat jika diperlukan, pastikan elemen termodifikasi dengan baik
+  await page.waitForTimeout(500); // Menunggu 500ms jika perlu untuk perubahan UI atau animasi
 
-    // 5. Menutup browser
-    await browser.close();
+  // 7. Temukan elemen memeContainer dan ambil screenshot
+  const memeContainer = page.locator('#memeContainer');
+  await memeContainer.screenshot({ path: 'meme-container.png' });
+
+  // 8. Tutup browser
+  await browser.close();
 
     // Mengirimkan screenshot sebagai respon
     res.set('Content-Type', 'image/png');
