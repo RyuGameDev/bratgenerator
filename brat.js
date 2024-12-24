@@ -21,7 +21,7 @@ app.post('/screenshot', async (req, res) => {
   const page = await browser.newPage();
 
   // 2. Buka halaman web
-  await page.goto('URL_HALAMAN'); // Ganti dengan URL halaman Anda
+  await page.goto('https://www.bratgenerator.com/'); // Ganti dengan URL halaman Anda
 
   // 3. Tunggu dan tutup pop-up persetujuan cookie jika ada
   await page.locator('#onetrust-accept-btn-handler').click(); // Ganti dengan selector tombol jika berbeda
