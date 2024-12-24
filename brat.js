@@ -38,7 +38,7 @@ app.post('/screenshot', async (req, res) => {
 
   // 7. Temukan elemen memeContainer dan ambil screenshot
   const memeContainer = page.locator('#memeContainer');
-  await memeContainer.screenshot({ path: 'meme-container.png' });
+  const screenshotBuffer = await memeContainer.screenshot();
 
   // 8. Tutup browser
   await browser.close();
